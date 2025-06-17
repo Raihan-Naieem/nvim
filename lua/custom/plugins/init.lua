@@ -59,4 +59,33 @@ return {
       end, { desc = 'Harpoon: Remove file 4' })
     end,
   },
+
+  -- html-css intelicence
+
+  -- null-ls.nvim plugin definition
+  -- {
+  --   'jose-elias-alvarez/null-ls.nvim',
+  --   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  --   config = function()
+  --     local null_ls = require("null-ls")
+  --
+  --     null_ls.setup({
+  --       sources = {
+  --         null_ls.builtins.diagnostics.ruff,
+  --         null_ls.builtins.formatting.ruff.with({ extra_args = { "--fix" } }),
+  --         -- Add other sources here, e.g.:
+  --         -- null_ls.builtins.formatting.prettier,
+  --         -- null_ls.builtins.diagnostics.eslint,
+  --       },
+  --       on_attach = function(client)
+  --         if client.supports_method("textDocument/formatting") then
+  --           vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
+  --         end
+  --       end,
+  --       -- You can add other null-ls options here, e.g.:
+  --       -- debug = true,
+  --       -- log_level = "warn",
+  --     })
+  --   end,
+  -- },
 }
