@@ -923,7 +923,7 @@ require('lazy').setup({
       require('tokyonight').setup {
         transparent = true,
         styles = {
-          comments = { italic = true }, -- Disable italics in comments
+          comments = { italic = true, fg = '#00FF00' }, -- Disable italics in comments
         },
       }
 
