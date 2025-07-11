@@ -101,6 +101,11 @@ vim.o.foldlevel = 99 -- Prevent everything from starting folded
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- save, quit
+
+vim.keymap.set('n', '<leader>w', '<cmd>w<CR>', { desc = 'save' })
+vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'quit' })
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
@@ -190,7 +195,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Open project view' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
