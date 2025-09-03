@@ -37,8 +37,10 @@ vim.o.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
---
+-- systemwide copy/pase
 vim.keymap.set('n', 'Y', '"+y', { noremap = true, silent = true })
+vim.keymap.set('n', 'YY', '"+yy', { noremap = true, silent = true })
+vim.keymap.set('n', 'P', '"+p', { noremap = true, silent = true })
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
