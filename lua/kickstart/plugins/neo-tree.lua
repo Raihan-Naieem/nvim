@@ -19,7 +19,17 @@ return {
         mappings = {
           ['\\'] = 'close_window',
         },
+        width = 25,
       },
     },
   },
+  config = function(_, opts)
+    require('neo-tree').setup(opts)
+
+    -- transparent background
+    vim.cmd [[
+      hi NeoTreeNormal guibg=NONE
+      hi NeoTreeNormalNC guibg=NONE
+    ]]
+  end,
 }
