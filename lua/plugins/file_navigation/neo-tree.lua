@@ -19,6 +19,7 @@ return {
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          ['h'] = 'toggle_hidden',
         },
         width = 25,
       },
