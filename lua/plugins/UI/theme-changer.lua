@@ -11,7 +11,7 @@ return {
       livePreview = true, -- preview before applying
     }
 
-    -- Keymap: <leader>ct to open Themery
+    -- Keymap: <leader>st to open Themery
     vim.keymap.set('n', '<leader>st', '<cmd>Themery<CR>', { desc = '[S]elect [T]heme' })
   end,
 }

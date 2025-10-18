@@ -5,10 +5,7 @@ return {
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
-        transparent = true,
-        styles = {
-          comments = { italic = true, fg = '#65806c' }, -- Disable italics in comments
-        },
+        styles = {},
       }
 
       vim.cmd.colorscheme 'tokyonight-night'

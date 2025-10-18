@@ -15,13 +15,14 @@ rtp:prepend(lazypath)
 local plugins = {
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
-  require('plugins.dev'),
-  require('plugins.editor'),
-  require('plugins.file_navigation'),
-  require('plugins.highlighting'),
-  require('plugins.LSP'),
-  require('plugins.UI'),
-  require('plugins.version_control'),
+  require 'plugins.dev',
+  require 'plugins.editor',
+  require 'plugins.file_navigation',
+  require 'plugins.highlighting',
+  require 'plugins.LSP',
+  require 'plugins.UI',
+  require 'plugins.version_control',
+  require 'plugins.misc',
 }
 
 require('lazy').setup(plugins, {

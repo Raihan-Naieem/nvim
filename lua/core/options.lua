@@ -5,7 +5,7 @@ vim.o.foldenable = true
 vim.o.foldlevel = 99 -- Prevent everything from starting folded
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 vim.opt.tabstop = 2 -- Number of spaces a tab counts for
 vim.opt.shiftwidth = 2 -- Number of spaces to use for autoindent
 vim.o.number = true -- Make line numbers default
