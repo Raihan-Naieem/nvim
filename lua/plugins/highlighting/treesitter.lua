@@ -20,6 +20,8 @@ return {
         'vim',
         'vimdoc',
         'jinja',
+        'cpp',
+        'markdown',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,

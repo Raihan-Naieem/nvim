@@ -1,7 +1,5 @@
--- lua/core/transparent.lua
 local M = {}
 
--- Only UI groups; do NOT touch Treesitter (@*) or syntax highlights
 local groups = {
   'Normal',
   'NormalNC',
@@ -11,7 +9,6 @@ local groups = {
   'StatusLineNC',
   'NormalFloat',
   'Pmenu',
-  'PmenuSel',
   'LineNr',
   'CursorLineNr',
   'FloatBorder',
@@ -29,22 +26,40 @@ local groups = {
   'CmpItemMenu',
 }
 
+-- add border highlight groups
+local border_groups = {
+  'WinSeparator',
+  'FloatBorder',
+  'TelescopeBorder',
+  'WhichKeyBorder',
+  'LspInfoBorder',
+  'CmpBorder',
+}
+
 local function clear_bg()
   for _, g in ipairs(groups) do
-    -- Only clear background
     pcall(vim.api.nvim_set_hl, 0, g, { bg = 'NONE' })
   end
 end
 
-function M.setup()
-  -- Apply immediately
-  clear_bg()
+local function apply_borders()
+  for _, g in ipairs(border_groups) do
+    -- set visible border color with transparent background
+    pcall(vim.api.nvim_set_hl, 0, g, { fg = '#5eacd3', bg = 'NONE' })
+  end
+end
 
-  -- Re-apply transparency on colorscheme change
+function M.setup()
+  clear_bg()
+  apply_borders()
+
   vim.api.nvim_create_autocmd('ColorScheme', {
     pattern = '*',
-    callback = clear_bg,
-    desc = 'Make normal areas transparent for any colorscheme',
+    callback = function()
+      clear_bg()
+      apply_borders()
+    end,
+    desc = 'Re-apply transparency and borders on colorscheme change',
   })
 end
 
