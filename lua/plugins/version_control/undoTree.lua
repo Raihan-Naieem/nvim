@@ -18,7 +18,8 @@ return {
         layout = 'left_bottom',
         ignore_filetype = { 'undotree', 'undotreeDiff', 'qf', 'TelescopePrompt' },
         window = {
-          winblend = 30,
+          winblend = 20,
+          width = 20,
         },
       }
     end,

@@ -20,12 +20,12 @@ return {
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
         opts = {},
       },
@@ -56,9 +56,12 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'snippets', 'lsp', 'path', 'lazydev' },
         providers = {
+          snippets = { score_offset = 120 },
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          lsp = { score_offset = 80 },
+          path = { score_offset = 60 },
         },
       },
 
