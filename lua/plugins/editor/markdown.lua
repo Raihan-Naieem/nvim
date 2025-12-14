@@ -17,23 +17,21 @@ return {
       render = 'all',
     },
 
-    -- inline images / obsidian-style embedding
-
     image = {
       enabled = true,
       provider = 'wezterm',
       show_label = true,
       show_size = true,
-      max_width = 60,
-      max_height = 40,
+
+      max_width = function()
+        return vim.api.nvim_win_get_width(0)
+      end,
+
+      max_height = function()
+        return vim.api.nvim_win_get_height(0)
+      end,
+
       types = { 'png', 'jpg', 'jpeg', 'svg', 'webp', 'gif' },
-    },
-    -- headings similar to obsidian’s clean look
-    heading = {
-      enabled = true,
-      sign = false,
-      border = false,
-      icons = { '', '', '', '', '', '' },
     },
 
     -- lists that look closer to obsidian
