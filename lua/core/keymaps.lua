@@ -3,7 +3,7 @@ vim.keymap.set('n', '<leader>w', '<cmd>w<cr>', { desc = 'save' })
 vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = 'quit' })
 
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
-vim.keymap.set('n', '<leader>pv', vim.cmd.ex, { desc = 'open project view' })
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'open project view' })
 vim.keymap.set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'open diagnostic [q]uickfix list' })
 -- vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'exit terminal mode' })
 vim.keymap.set('n', '<c-h>', '<c-w><c-h>', { desc = 'move focus to the left window' })

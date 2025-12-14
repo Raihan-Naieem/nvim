@@ -23,6 +23,7 @@ local plugins = {
   require 'plugins.UI',
   require 'plugins.version_control',
   require 'plugins.misc',
+  require 'plugins.Ai',
 }
 
 require('lazy').setup(plugins, {
