@@ -10,11 +10,19 @@ return {
     },
     config = function()
       ---@type opencode.Opts
+      -- vim.g.opencode_opts = {
+      --   -- custom opts if needed
+      --   provider = {
+      --     enabled = 'wezterm',
+      --     wezterm = {},
+      --   },
+      -- }
       vim.g.opencode_opts = {
-        -- custom opts if needed
         provider = {
-          enabled = 'wezterm',
-          wezterm = {},
+          enabled = 'snacks',
+          snacks = {
+            -- ...
+          },
         },
       }
 
@@ -24,7 +32,7 @@ return {
       local opencode = require 'opencode'
 
       -- Leader-based keymaps
-      vim.keymap.set({ 'x' }, '<leader>oa', function()
+      vim.keymap.set('x', '<leader>oa', function()
         opencode.ask('@this: ', { submit = true })
       end, { desc = 'opencode: ask' })
 
