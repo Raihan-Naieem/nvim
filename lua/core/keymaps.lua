@@ -19,10 +19,8 @@ vim.keymap.set('n', '<c-s-k>', '<c-w>k', { desc = 'move window to the upper' })
 vim.keymap.set({ 'n', 'v' }, 'x', '"_x', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'c', '"_c', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'C', '"_C', { noremap = true })
-
--- Force y to always use Neovim's unnamed register
-vim.keymap.set({ 'n', 'v' }, 'y', '"*y', { noremap = true }) -- optional line below
-vim.keymap.set({ 'n', 'v' }, 'y', '"yy', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'D', '"_D', { noremap = true })
 
 -- makes cursor fixed in middle when using j and k to scroll
 local opts = { noremap = true, silent = true }

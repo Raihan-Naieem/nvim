@@ -13,10 +13,6 @@ vim.o.relativenumber = true
 
 -- vim.o.mouse = 'a'
 vim.o.showmode = false
--- Sync clipboard between OS and Neovim.
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
 
 vim.o.breakindent = true -- Enable break indent
 vim.o.undofile = true -- Save undo history
