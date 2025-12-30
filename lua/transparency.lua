@@ -4,8 +4,6 @@ local groups = {
   'Normal',
   'NormalNC',
   'SignColumn',
-  'VertSplit',
-  'StatusLine',
   'StatusLineNC',
   'NormalFloat',
   'Pmenu',
@@ -34,6 +32,8 @@ local border_groups = {
   'WhichKeyBorder',
   'LspInfoBorder',
   'CmpBorder',
+  'VertSplit',
+  'StatusLine',
 }
 
 local function clear_bg()

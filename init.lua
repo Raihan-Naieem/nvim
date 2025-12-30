@@ -8,6 +8,9 @@ vim.opt_local.wrap = true
 vim.opt_local.linebreak = true
 vim.opt_local.breakindent = true
 
+-- use gy to system copy and gp to system paste
+vim.opt.clipboard = ''
+
 require 'core'
 require 'plugins'
 require('transparency').setup()
