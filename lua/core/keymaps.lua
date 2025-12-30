@@ -15,9 +15,16 @@ vim.keymap.set('n', '<c-s-l>', '<c-w>l', { desc = 'move window to the right' })
 vim.keymap.set('n', '<c-s-j>', '<c-w>j', { desc = 'move window to the lower' })
 vim.keymap.set('n', '<c-s-k>', '<c-w>k', { desc = 'move window to the upper' })
 
+-- Send x and c to the black-hole register (content discarded)
+vim.keymap.set({ 'n', 'v' }, 'x', '"_x', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'c', '"_c', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'C', '"_C', { noremap = true })
+
+-- Force y to always use Neovim's unnamed register
+vim.keymap.set({ 'n', 'v' }, 'y', '"*y', { noremap = true }) -- optional line below
+vim.keymap.set({ 'n', 'v' }, 'y', '"yy', { noremap = true })
+
 -- makes cursor fixed in middle when using j and k to scroll
-
 local opts = { noremap = true, silent = true }
-
 vim.api.nvim_set_keymap('n', 'j', 'jzz', opts)
 vim.api.nvim_set_keymap('n', 'k', 'kzz', opts)

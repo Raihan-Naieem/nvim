@@ -10,16 +10,12 @@ return {
         'L3MON4D3/LuaSnip',
         version = '2.*',
         build = (function()
-          -- Remove the below condition to re-enable on windows.
           if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
             return
           end
           return 'make install_jsregexp'
         end)(),
         dependencies = {
-          -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
           {
             'rafamadriz/friendly-snippets',
             config = function()
@@ -31,44 +27,48 @@ return {
       },
       'folke/lazydev.nvim',
     },
-    --- @module 'blink.cmp'
-    --- @type blink.cmp.Config
     opts = {
-      keymap = {
-        -- 'default' (recommended) for mappings similar to built-in completions
-        --   <c-y> to accept ([y]es) the completion.
-        -- 'super-tab' for tab to accept
-        -- 'enter' for enter to accept
-        -- 'none' for no mappings
-        preset = 'default',
+      keymap = { preset = 'default' },
 
-        -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-      },
+      appearance = { nerd_font_variant = 'mono' },
 
-      appearance = {
-        nerd_font_variant = 'mono',
-      },
-
-      completion = {
-        -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = true, auto_show_delay_ms = 500 },
-      },
+      completion = { documentation = { auto_show = true, auto_show_delay_ms = 500 } },
 
       sources = {
-        default = { 'snippets', 'lsp', 'path', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'lazydev' },
         providers = {
-          snippets = { score_offset = 120 },
-          lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-          lsp = { score_offset = 80 },
-          path = { score_offset = 60 },
+          -- Snippets only when NOT after a dot
+          snippets = {
+            score_offset = 120,
+
+            enabled = function()
+              local col = vim.fn.col '.' - 1
+              if col == 0 then
+                return true
+              end
+              local line = vim.api.nvim_get_current_line()
+              local char_before = line:sub(col, col)
+              return char_before ~= '.'
+            end,
+          },
+
+          lazydev = {
+            module = 'lazydev.integrations.blink',
+            score_offset = 90,
+          },
+
+          lsp = {
+            score_offset = 100,
+          },
+
+          path = {
+            score_offset = 80,
+          },
         },
       },
 
       snippets = { preset = 'luasnip' },
 
-      -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
-      -- which automatically downloads a prebuilt binary when enabled.
       fuzzy = { implementation = 'lua' },
       signature = { enabled = true },
     },

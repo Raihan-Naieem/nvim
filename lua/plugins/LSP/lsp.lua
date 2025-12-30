@@ -10,7 +10,6 @@ return {
     },
   },
 
-
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -155,6 +154,31 @@ return {
             },
           },
         },
+
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                -- Docker Compose schema
+                ['https://json.schemastore.org/docker-compose.json'] = {
+                  'docker-compose.yml',
+                  'docker-compose.override.yml',
+                  'compose*.yml',
+                },
+                -- Kubernetes schema
+                ['https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.27.0-standalone-strict/all.json'] = {
+                  'k8s/*.yml',
+                  '*.k8s.yml',
+                  '*.kube.yml',
+                },
+              },
+              validate = true, -- enable schema validation
+              completion = true, -- enable auto-completion
+              hover = true, -- hover docs
+              format = true, -- LSP formatting
+            },
+          },
+        },
       }
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
@@ -174,6 +198,4 @@ return {
       }
     end,
   },
-
 }
-
