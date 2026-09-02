@@ -138,7 +138,7 @@ return {
         html = {},
         cssls = {},
         emmet_ls = {
-          filetype = { 'html', 'css', 'javascript', 'javascriptreact', 'typescriptreact' },
+          filetype = { 'html', 'css', 'javascript', 'javascriptreact', 'typescriptreact', 'typescript' },
         },
         ts_ls = {},
         lua_ls = {

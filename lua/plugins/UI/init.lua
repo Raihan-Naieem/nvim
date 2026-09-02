@@ -3,4 +3,5 @@ return {
   require 'plugins.UI.colorscheme',
   require 'plugins.UI.theme-changer',
   require 'plugins.UI.css-colorViewer',
+  require 'plugins.UI.lualine',
 }

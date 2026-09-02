@@ -2,10 +2,19 @@ return {
 
   { -- Linting
     'mfussenegger/nvim-lint',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = {
+      'BufReadPre',
+      'BufNewFile',
+    },
     config = function()
       local lint = require 'lint'
-      lint.linters_by_ft = {}
+
+      lint.linters_by_ft = {
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        json = { 'jsonlint' },
+        python = { 'ruff' },
+      }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
       -- instead set linters_by_ft like this:

@@ -1,11 +1,9 @@
 return {
-
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
     dependencies = {
-      -- Snippet Engine
       {
         'L3MON4D3/LuaSnip',
         version = '2.*',
@@ -27,29 +25,40 @@ return {
       },
       'folke/lazydev.nvim',
     },
+
     opts = {
       keymap = { preset = 'default' },
 
-      appearance = { nerd_font_variant = 'mono' },
+      appearance = {
+        nerd_font_variant = 'mono',
+      },
 
-      completion = { documentation = { auto_show = true, auto_show_delay_ms = 500 } },
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 500,
+        },
+      },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        per_filetype = { opencode_ask = { 'lsp' } },
+
+        transform_items = function(ctx, items)
+          if ctx.line:sub(ctx.cursor[2], ctx.cursor[2]) == '.' then
+            local kinds = require('blink.cmp.types').CompletionItemKind
+
+            items = vim.tbl_filter(function(item)
+              return item.kind ~= kinds.Snippet
+            end, items)
+          end
+
+          return items
+        end,
+
         providers = {
-          -- Snippets only when NOT after a dot
           snippets = {
             score_offset = 120,
-
-            enabled = function()
-              local col = vim.fn.col '.' - 1
-              if col == 0 then
-                return true
-              end
-              local line = vim.api.nvim_get_current_line()
-              local char_before = line:sub(col, col)
-              return char_before ~= '.'
-            end,
           },
 
           lazydev = {
@@ -67,10 +76,17 @@ return {
         },
       },
 
-      snippets = { preset = 'luasnip' },
+      snippets = {
+        preset = 'luasnip',
+      },
 
-      fuzzy = { implementation = 'lua' },
-      signature = { enabled = true },
+      fuzzy = {
+        implementation = 'lua',
+      },
+
+      signature = {
+        enabled = true,
+      },
     },
   },
 }
