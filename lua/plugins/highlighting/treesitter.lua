@@ -3,41 +3,78 @@ return {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+    main = 'nvim-treesitter.configs',
+
     opts = {
       ensure_installed = {
-        'python',
+        -- Shell
         'bash',
+
+        -- C/C++
         'c',
-        'diff',
-        'html',
+        'cpp',
+
+        -- Python
+        'python',
+
+        -- Lua
         'lua',
         'luadoc',
+
+        -- JavaScript ecosystem
+        'javascript',
+        'typescript',
+        'jsx',
+        'tsx',
+
+        -- Web
+        'html',
+        'css',
+        'scss',
+        'xml',
+
+        -- Backend / Systems
+        'go',
+        'rust',
+        'java',
+
+        -- Config / Data
+        'json',
+        'yaml',
+        'toml',
+        'regex',
+
+        -- Markdown
         'markdown',
         'markdown_inline',
+
+        -- Git
+        'gitignore',
+        'diff',
+
+        -- Neovim
         'query',
         'vim',
         'vimdoc',
+
+        -- Templates
         'jinja',
-        'cpp',
-        'markdown',
+
+        -- Docker
+        'dockerfile',
       },
-      -- Autoinstall languages that are not installed
+
       auto_install = true,
+
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+
+      indent = {
+        enable = true,
+        disable = { 'ruby' },
+      },
     },
-    --
-    -- {
-    --   'lepture/vim-jinja', -- Jinja syntax highlighting
-    -- },
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 }

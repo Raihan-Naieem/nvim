@@ -47,6 +47,8 @@ return {
       { '<leader>o', group = '[O]pencode', mode = { 'n', 'x' } },
       { '<leader>r', group = '[R]un cpp' },
       { '<leader>l', group = '[L]azy git' },
+      { '<leader>l', group = '[L]azy git' },
+      { '<leader>o', group = '[O]penCode' },
     },
   },
 }
