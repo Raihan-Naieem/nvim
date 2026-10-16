@@ -1,14 +1,10 @@
 return {
-
   {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
     ---@type snacks.Config
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
       bigfile = { enabled = true },
       dashboard = { enabled = true },
       input = { enabled = true },
@@ -26,13 +22,19 @@ return {
           opencode_send = function(picker)
             local items = vim.tbl_map(function(item)
               return item.file
-                and require('opencode').format({ path = item.file, from = item.pos, to = item.end_pos })
+                  and require('opencode').format {
+                    path = item.file,
+                    from = item.pos,
+                    to = item.end_pos,
+                  }
                 or item.text
-            end, picker:selected({ fallback = true }))
+            end, picker:selected { fallback = true })
+
             require('opencode').prompt(table.concat(items, ', ') .. ' ')
           end,
         },
       },
+
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },
       image = { enabled = true },
@@ -52,19 +54,6 @@ return {
         filter = function(buf)
           return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= 'terminal'
         end,
-      },
-
-      terminal = { enabled = true },
-    },
-
-    keys = {
-      {
-        '<leader>t',
-        function()
-          Snacks.terminal()
-        end,
-        mode = { 'n', 't' }, -- n = normal, t = terminal
-        desc = 'Toggle Terminal',
       },
     },
   },

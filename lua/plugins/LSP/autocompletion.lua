@@ -1,33 +1,36 @@
 return {
-  { -- Autocompletion
+  -- Autocompletion
+  {
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
+
     dependencies = {
       {
         'L3MON4D3/LuaSnip',
         version = '2.*',
         build = (function()
-          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+          if vim.fn.has('win32') == 1
+            or vim.fn.executable('make') == 0
+          then
             return
           end
+
           return 'make install_jsregexp'
         end)(),
+
         dependencies = {
-          {
-            'rafamadriz/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-            end,
-          },
+          'rafamadriz/friendly-snippets',
         },
+
         opts = {},
       },
-      'folke/lazydev.nvim',
     },
 
     opts = {
-      keymap = { preset = 'default' },
+      keymap = {
+        preset = 'default',
+      },
 
       appearance = {
         nerd_font_variant = 'mono',
@@ -41,12 +44,27 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
-        per_filetype = { opencode_ask = { 'lsp' } },
+        default = {
+          'lsp',
+          'path',
+          'snippets',
+        },
+
+        per_filetype = {
+          opencode_ask = { 'lsp' },
+        },
 
         transform_items = function(ctx, items)
-          if ctx.line:sub(ctx.cursor[2], ctx.cursor[2]) == '.' then
-            local kinds = require('blink.cmp.types').CompletionItemKind
+          -- Suppress snippet templates inside member expressions,
+          -- such as app., app.get, user.name, and object.method().
+          local before_cursor = ctx.line:sub(1, ctx.cursor[2])
+
+          local in_member_expression =
+            before_cursor:match('%.[%w_]*$') ~= nil
+
+          if in_member_expression then
+            local kinds =
+              require('blink.cmp.types').CompletionItemKind
 
             items = vim.tbl_filter(function(item)
               return item.kind ~= kinds.Snippet
@@ -58,12 +76,7 @@ return {
 
         providers = {
           snippets = {
-            score_offset = 120,
-          },
-
-          lazydev = {
-            module = 'lazydev.integrations.blink',
-            score_offset = 90,
+            score_offset = 200,
           },
 
           lsp = {
@@ -88,5 +101,10 @@ return {
         enabled = true,
       },
     },
+
+    config = function(_, opts)
+      require('luasnip.loaders.from_vscode').lazy_load()
+      require('blink.cmp').setup(opts)
+    end,
   },
 }

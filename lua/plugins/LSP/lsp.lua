@@ -136,7 +136,13 @@ return {
         emmet_ls = {
           filetypes = { 'html', 'css', 'javascript', 'javascriptreact', 'typescriptreact', 'typescript' },
         },
-        ts_ls = {},
+        ts_ls = {
+          init_options = {
+            tsserver = {
+              path = vim.fn.expand '~/.local/share/nvim/mason/typescript5/node_modules/typescript/lib',
+            },
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },

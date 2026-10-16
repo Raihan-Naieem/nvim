@@ -4,10 +4,11 @@ return {
     branch = 'main',
     build = ':TSUpdate',
     config = function()
-      local ts = require('nvim-treesitter')
+      local ts = require 'nvim-treesitter'
       ts.setup {}
       local install = ts.install or require('nvim-treesitter.install').install
       install {
+        'http',
         'bash',
         'c',
         'cpp',

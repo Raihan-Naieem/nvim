@@ -45,5 +45,8 @@ require('lazy').setup(plugins, {
       task = '📌',
       lazy = '💤 ',
     },
+    rocks = {
+      hererocks = true,
+    },
   },
 })
