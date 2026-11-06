@@ -1,0 +1,23 @@
+{
+  "React Functional Component": {
+    "prefix": "rfcc",
+    "scope": "javascriptreact",
+    "body": [
+      "export function ${1:${TM_FILENAME_BASE}}(${2}) {",
+      "  ${3} ",
+      "  return (",
+      "    <>",
+      "      ${4}",
+      "    </>",
+      "  );",
+      "};"
+    ],
+    "description": "React functional component ES7"
+  },
+  "React component auto self close tag": {
+    "prefix": "cmp",
+    "scope": "javascriptreact",
+    "body": ["<${1:Component} />"],
+    "description": "React component auto self close tag"
+  }
+}

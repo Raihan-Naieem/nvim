@@ -1,0 +1,163 @@
+{
+	"Prisma Generator Client": {
+		"prefix": "pgen",
+		"scope": "prisma",
+		"body": [
+			"generator client {",
+			"  provider = \"prisma-client-js\"",
+			"}"
+		],
+		"description": "Prisma Client generator"
+	},
+	"Prisma PostgreSQL Datasource": {
+		"prefix": "pdb",
+		"scope": "prisma",
+		"body": [
+			"datasource db {",
+			"  provider = \"postgresql\"",
+			"  url      = env(\"DATABASE_URL\")",
+			"}"
+		],
+		"description": "PostgreSQL datasource"
+	},
+	"Prisma Model": {
+		"prefix": "pmodel",
+		"scope": "prisma",
+		"body": [
+			"model ${1:User} {",
+			"  id        Int      @id @default(autoincrement())",
+			"  createdAt DateTime @default(now())",
+			"  updatedAt DateTime @updatedAt",
+			"  $0",
+			"}"
+		],
+		"description": "Create a model with common fields"
+	},
+	"Prisma UUID Model": {
+		"prefix": "puuidmodel",
+		"scope": "prisma",
+		"body": [
+			"model ${1:User} {",
+			"  id        String   @id @default(uuid())",
+			"  createdAt DateTime @default(now())",
+			"  updatedAt DateTime @updatedAt",
+			"  $0",
+			"}"
+		],
+		"description": "Model using UUID primary key"
+	},
+	"Prisma String Field": {
+		"prefix": "pstr",
+		"scope": "prisma",
+		"body": "${1:name} String",
+		"description": "String field"
+	},
+	"Prisma Optional Field": {
+		"prefix": "popt",
+		"scope": "prisma",
+		"body": "${1:name} ${2:String}?",
+		"description": "Optional field"
+	},
+	"Prisma Unique Field": {
+		"prefix": "puniq",
+		"scope": "prisma",
+		"body": "${1:email} String @unique",
+		"description": "Unique field"
+	},
+	"Prisma Default String": {
+		"prefix": "pdefault",
+		"scope": "prisma",
+		"body": "${1:status} String @default(\"${2:ACTIVE}\")",
+		"description": "String field with default value"
+	},
+	"Prisma Enum": {
+		"prefix": "penum",
+		"scope": "prisma",
+		"body": [
+			"enum ${1:Role} {",
+			"  ${2:USER}",
+			"  ${3:ADMIN}",
+			"}"
+		],
+		"description": "Create an enum"
+	},
+	"Prisma One-to-Many Relation": {
+		"prefix": "p1m",
+		"scope": "prisma",
+		"body": [
+			"${1:posts} ${2:Post}[]"
+		],
+		"description": "One-to-many relation field"
+	},
+	"Prisma Many-to-One Relation": {
+		"prefix": "pm1",
+		"scope": "prisma",
+		"body": [
+			"${1:author} ${2:User} @relation(fields: [${3:authorId}], references: [${4:id}])",
+			"${3:authorId} ${4:Int}"
+		],
+		"description": "Relation with foreign key"
+	},
+	"Prisma Many-to-Many Relation": {
+		"prefix": "pmm",
+		"scope": "prisma",
+		"body": [
+			"${1:users} ${2:User}[]"
+		],
+		"description": "Many-to-many relation field"
+	},
+	"Prisma Index": {
+		"prefix": "pindex",
+		"scope": "prisma",
+		"body": "@@index([${1:email}])",
+		"description": "Add a database index"
+	},
+	"Prisma Composite Unique": {
+		"prefix": "pcompound",
+		"scope": "prisma",
+		"body": "@@unique([${1:userId}, ${2:postId}])",
+		"description": "Composite unique constraint"
+	},
+	"Prisma Map Table": {
+		"prefix": "pmap",
+		"scope": "prisma",
+		"body": "@@map(\"${1:table_name}\")",
+		"description": "Map model to database table"
+	},
+	"Prisma Map Column": {
+		"prefix": "pmapcol",
+		"scope": "prisma",
+		"body": "@map(\"${1:column_name}\")",
+		"description": "Map field to database column"
+	},
+	"Prisma Updated At": {
+		"prefix": "pupdated",
+		"scope": "prisma",
+		"body": "updatedAt DateTime @updatedAt",
+		"description": "Automatically update timestamp"
+	},
+	"Prisma Created At": {
+		"prefix": "pcreated",
+		"scope": "prisma",
+		"body": "createdAt DateTime @default(now())",
+		"description": "Creation timestamp"
+	},
+	"Prisma Soft Delete": {
+		"prefix": "psoftdelete",
+		"scope": "prisma",
+		"body": "deletedAt DateTime?",
+		"description": "Optional soft-delete timestamp"
+	},
+	"Prisma Boolean Default": {
+		"prefix": "pbool",
+		"scope": "prisma",
+		"body": "${1:isActive} Boolean @default(true)",
+		"description": "Boolean field defaulting to true"
+	},
+	"Prisma Decimal": {
+		"prefix": "pdecimal",
+		"scope": "prisma",
+		"body": "${1:price} Decimal @db.Decimal(${2:10}, ${3:2})",
+		"description": "Decimal field for PostgreSQL"
+	}
+}

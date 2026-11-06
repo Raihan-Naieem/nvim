@@ -10,9 +10,7 @@ return {
         'L3MON4D3/LuaSnip',
         version = '2.*',
         build = (function()
-          if vim.fn.has('win32') == 1
-            or vim.fn.executable('make') == 0
-          then
+          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
             return
           end
 
@@ -54,39 +52,27 @@ return {
           opencode_ask = { 'lsp' },
         },
 
-        transform_items = function(ctx, items)
-          -- Suppress snippet templates inside member expressions,
-          -- such as app., app.get, user.name, and object.method().
-          local before_cursor = ctx.line:sub(1, ctx.cursor[2])
-
-          local in_member_expression =
-            before_cursor:match('%.[%w_]*$') ~= nil
-
-          if in_member_expression then
-            local kinds =
-              require('blink.cmp.types').CompletionItemKind
-
-            items = vim.tbl_filter(function(item)
-              return item.kind ~= kinds.Snippet
-            end, items)
-          end
-
-          return items
-        end,
-
-        providers = {
-          snippets = {
-            score_offset = 200,
-          },
-
-          lsp = {
-            score_offset = 100,
-          },
-
-          path = {
-            score_offset = 80,
-          },
-        },
+        -- providers = {
+        --   snippets = {
+        --     score_offset = 200,
+        --   },
+        --
+        --   buffer = {
+        --     score_offset = 160,
+        --   },
+        --
+        --   lsp = {
+        --     score_offset = 130,
+        --   },
+        --
+        --   path = {
+        --     score_offset = 80,
+        --   },
+        --
+        --   omni = {
+        --     score_offset = 30,
+        --   },
+        -- },
       },
 
       snippets = {
@@ -95,6 +81,11 @@ return {
 
       fuzzy = {
         implementation = 'lua',
+        sorts = {
+          'exact',
+          'score',
+          'sort_text',
+        },
       },
 
       signature = {
@@ -103,7 +94,21 @@ return {
     },
 
     config = function(_, opts)
+      -- Load friendly-snippets (found via package.json manifests in runtimepath)
       require('luasnip.loaders.from_vscode').lazy_load()
+
+      -- Load custom snippets from snippets/*.json as standalone collections.
+      -- Each snippet file's "scope" field (e.g. "http", "prisma") restricts it
+      -- to that filetype, so they do NOT leak into other buffers.
+      -- Drop a new .json file in snippets/ and it's picked up on restart.
+      local snippet_dir = vim.fn.stdpath 'config' .. '/snippets'
+      for _, file in ipairs(vim.fn.glob(snippet_dir .. '/*.json', false, true)) do
+        require('luasnip.loaders.from_vscode').load_standalone {
+          path = file,
+          lazy = true, -- also pick up files created after startup
+        }
+      end
+
       require('blink.cmp').setup(opts)
     end,
   },

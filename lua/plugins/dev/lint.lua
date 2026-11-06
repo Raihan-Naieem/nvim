@@ -9,10 +9,10 @@ return {
     config = function()
       local lint = require 'lint'
 
+      -- ESLint diagnostics come from the `eslint` LSP (see lsp.lua), which
+      -- covers javascript/typescript/javascriptreact/typescriptreact.
+      -- Running eslint_d here as well would duplicate those diagnostics.
       lint.linters_by_ft = {
-        javascript = { 'eslint_d' },
-        typescript = { 'eslint_d' },
-        json = { 'jsonlint' },
         python = { 'ruff' },
       }
 

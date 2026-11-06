@@ -25,11 +25,11 @@ return {
     },
     config = function()
       require('telescope').setup {
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          file_ignore_patterns = {
+            'node_modules/.*',
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -74,6 +74,4 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
-
-
 }

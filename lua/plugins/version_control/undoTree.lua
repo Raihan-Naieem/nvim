@@ -1,7 +1,8 @@
 return {
   {
     'jiaoshijie/undotree',
-    dependencies = 'nvim-lua/plenary.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+
     keys = {
       {
         '<leader>u',
@@ -12,14 +13,20 @@ return {
         mode = 'n',
       },
     },
+
     config = function()
       require('undotree').setup {
         float_diff = true,
-        layout = 'left_bottom',
-        ignore_filetype = { 'undotree', 'undotreeDiff', 'qf', 'TelescopePrompt' },
+        layout = 'float',
+        ignore_filetype = {
+          'undotree',
+          'undotreeDiff',
+          'qf',
+          'TelescopePrompt',
+        },
         window = {
           winblend = 20,
-          width = 20,
+          width = 30,
         },
       }
     end,

@@ -115,7 +115,7 @@ return {
           down = '<M-j>',
           up = '<M-k>',
 
-          -- Move current line in Normal mode
+          -- Normal mode: move current line
           line_left = '<M-h>',
           line_right = '<M-l>',
           line_down = '<M-j>',
@@ -128,6 +128,55 @@ return {
           reindent_linewise = true,
         },
       }
+
+      -- Extra mini.move mappings: Alt + arrow keys (setup() only accepts one key per direction)
+      vim.keymap.set('x', '<M-Left>', '<Cmd>lua MiniMove.move_selection("left")<CR>', { silent = true, desc = 'Move selection left' })
+      vim.keymap.set('x', '<M-Down>', '<Cmd>lua MiniMove.move_selection("down")<CR>', { silent = true, desc = 'Move selection down' })
+      vim.keymap.set('x', '<M-Up>', '<Cmd>lua MiniMove.move_selection("up")<CR>', { silent = true, desc = 'Move selection up' })
+      vim.keymap.set('x', '<M-Right>', '<Cmd>lua MiniMove.move_selection("right")<CR>', { silent = true, desc = 'Move selection right' })
+
+      -- Normal mode: move current line
+      vim.keymap.set('n', '<M-Down>', '<Cmd>lua MiniMove.move_line("down")<CR>', {
+        silent = true,
+        desc = 'Move line down',
+      })
+
+      vim.keymap.set('n', '<M-Up>', '<Cmd>lua MiniMove.move_line("up")<CR>', {
+        silent = true,
+        desc = 'Move line up',
+      })
+
+      vim.keymap.set('n', '<M-Left>', '<Cmd>lua MiniMove.move_line("left")<CR>', {
+        silent = true,
+        desc = 'Move line left',
+      })
+
+      vim.keymap.set('n', '<M-Right>', '<Cmd>lua MiniMove.move_line("right")<CR>', {
+        silent = true,
+        desc = 'Move line right',
+      })
+
+      require('mini.map').setup {
+        integrations = {
+          require('mini.map').gen_integration.builtin_search(),
+          require('mini.map').gen_integration.diagnostic(),
+          require('mini.map').gen_integration.gitsigns(),
+        },
+
+        symbols = {
+          encode = require('mini.map').gen_encode_symbols.dot '4x2',
+        },
+
+        window = {
+          width = 10,
+          winblend = 25,
+          show_integration_count = true,
+        },
+      }
+
+      vim.keymap.set('n', '<leader>m', MiniMap.toggle, {
+        desc = 'Toggle minimap',
+      })
 
       -- require('mini.starter').setup {
       --   -- Whether to open starter buffer on VimEnter. Not opened if Neovim was

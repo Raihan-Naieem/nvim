@@ -8,7 +8,7 @@ return {
     render_modes = { 'n', 'c', 't' },
 
     -- make it work like obsidian
-    file_types = { 'markdown', 'md', 'html' },
+    file_types = { 'markdown', 'md' },
 
     -- render html blocks inside markdown
 
@@ -18,7 +18,7 @@ return {
     },
 
     image = {
-      enabled = true,
+      enabled = false,
       provider = 'wezterm',
       show_label = true,
       show_size = true,

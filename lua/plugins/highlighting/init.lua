@@ -1,4 +1,3 @@
 return {
-	require('plugins.highlighting.treesitter'),
+  require 'plugins.highlighting.treesitter',
 }
-

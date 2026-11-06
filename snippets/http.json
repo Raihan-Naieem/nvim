@@ -1,0 +1,326 @@
+{
+	"GET with token": {
+		"prefix": "gettk",
+		"scope": "http",
+		"body": [
+			"GET {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Authorization: Bearer {{token}}",
+			"Accept: application/json"
+		],
+		"description": "GET request with Bearer token"
+	},
+	"POST with token": {
+		"prefix": "posttk",
+		"scope": "http",
+		"body": [
+			"POST {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Authorization: Bearer {{token}}",
+			"Content-Type: application/json",
+			"",
+			"{",
+			"  \"$2\": \"$3\"",
+			"}"
+		],
+		"description": "POST JSON request with Bearer token"
+	},
+	"PUT with token": {
+		"prefix": "puttk",
+		"scope": "http",
+		"body": [
+			"PUT {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Authorization: Bearer {{token}}",
+			"Content-Type: application/json",
+			"",
+			"{",
+			"  \"$2\": \"$3\"",
+			"}"
+		],
+		"description": "PUT JSON request with Bearer token"
+	},
+	"DELETE with token": {
+		"prefix": "deletetk",
+		"scope": "http",
+		"body": [
+			"DELETE {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Authorization: Bearer {{token}}"
+		],
+		"description": "DELETE request with Bearer token"
+	},
+	"GET request": {
+		"prefix": "get",
+		"scope": "http",
+		"body": [
+			"GET {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Accept: application/json"
+		],
+		"description": "HTTP GET request"
+	},
+	"POST JSON": {
+		"prefix": "post",
+		"scope": "http",
+		"body": [
+			"POST {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Content-Type: application/json",
+			"",
+			"{",
+			"  \"$2\": \"$3\"",
+			"}"
+		],
+		"description": "POST JSON request"
+	},
+	"PUT JSON": {
+		"prefix": "put",
+		"scope": "http",
+		"body": [
+			"PUT {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Content-Type: application/json",
+			"",
+			"{",
+			"  \"$2\": \"$3\"",
+			"}"
+		],
+		"description": "PUT request replacing a resource"
+	},
+	"PATCH JSON": {
+		"prefix": "patch",
+		"scope": "http",
+		"body": [
+			"PATCH {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Content-Type: application/json",
+			"",
+			"{",
+			"  \"$2\": \"$3\"",
+			"}"
+		],
+		"description": "PATCH request partially updating a resource"
+	},
+	"DELETE request": {
+		"prefix": "delete",
+		"scope": "http",
+		"body": [
+			"DELETE {{baseUrl}}${1:/api/resource} HTTP/1.1"
+		],
+		"description": "HTTP DELETE request"
+	},
+	"HEAD request": {
+		"prefix": "head",
+		"scope": "http",
+		"body": [
+			"HEAD {{baseUrl}}${1:/api/resource} HTTP/1.1"
+		],
+		"description": "HTTP HEAD request"
+	},
+	"OPTIONS request": {
+		"prefix": "options",
+		"scope": "http",
+		"body": [
+			"OPTIONS {{baseUrl}}${1:/api/resource} HTTP/1.1"
+		],
+		"description": "HTTP OPTIONS request"
+	},
+	"TRACE request": {
+		"prefix": "trace",
+		"scope": "http",
+		"body": [
+			"TRACE {{baseUrl}}${1:/api/resource} HTTP/1.1"
+		],
+		"description": "HTTP TRACE request"
+	},
+	"CONNECT request": {
+		"prefix": "connect",
+		"scope": "http",
+		"body": [
+			"CONNECT ${1:example.com}:443 HTTP/1.1",
+			"Host: ${1:example.com}"
+		],
+		"description": "HTTP CONNECT tunnel request"
+	},
+	"GET by ID": {
+		"prefix": "getid",
+		"scope": "http",
+		"body": [
+			"GET {{baseUrl}}${1:/api/users}/${2:id} HTTP/1.1",
+			"Accept: application/json"
+		],
+		"description": "GET resource by ID"
+	},
+	"GET with query parameters": {
+		"prefix": "getq",
+		"scope": "http",
+		"body": [
+			"GET {{baseUrl}}${1:/api/users}?${2:page}=1&${3:limit}=10 HTTP/1.1",
+			"Accept: application/json"
+		],
+		"description": "GET with query parameters"
+	},
+	"Bearer authentication": {
+		"prefix": "bearer",
+		"scope": "http",
+		"body": [
+			"Authorization: Bearer {{token}}"
+		],
+		"description": "Bearer token authorization header"
+	},
+	"Basic authentication": {
+		"prefix": "basic",
+		"scope": "http",
+		"body": [
+			"Authorization: Basic ${1:base64-credentials}"
+		],
+		"description": "Basic authentication header"
+	},
+	"JSON content type": {
+		"prefix": "json",
+		"scope": "http",
+		"body": [
+			"Content-Type: application/json",
+			"Accept: application/json"
+		],
+		"description": "JSON request and response headers"
+	},
+	"Form URL encoded": {
+		"prefix": "form",
+		"scope": "http",
+		"body": [
+			"Content-Type: application/x-www-form-urlencoded",
+			"",
+			"${1:username}= ${2:naieem}&${3:password}=${4:secret}"
+		],
+		"description": "URL-encoded form request"
+	},
+	"Multipart form data": {
+		"prefix": "multipart",
+		"scope": "http",
+		"body": [
+			"POST {{baseUrl}}${1:/api/upload} HTTP/1.1",
+			"Content-Type: multipart/form-data; boundary=${2:boundary}",
+			"",
+			"--${2:boundary}",
+			"Content-Disposition: form-data; name=\"${3:file}\"; filename=\"${4:file.txt}\"",
+			"Content-Type: text/plain",
+			"",
+			"${5:file contents}",
+			"--${2:boundary}--"
+		],
+		"description": "Multipart form-data upload"
+	},
+	"Custom headers": {
+		"prefix": "headers",
+		"scope": "http",
+		"body": [
+			"Accept: application/json",
+			"${1:X-Request-ID}: ${2:request-id}"
+		],
+		"description": "Common and custom headers"
+	},
+	"Cookie header": {
+		"prefix": "cookie",
+		"scope": "http",
+		"body": [
+			"Cookie: ${1:sessionId}=${2:session-value}"
+		],
+		"description": "Cookie header"
+	},
+	"HTTP request separator": {
+		"prefix": "sep",
+		"scope": "http",
+		"body": [
+			"### ${1:Request description}"
+		],
+		"description": "Separate requests in an HTTP file"
+	},
+	"Base URL variable": {
+		"prefix": "baseurl",
+		"scope": "http",
+		"body": [
+			"@baseUrl = http://localhost:3000"
+		],
+		"description": "Define a reusable base URL"
+	},
+	"Token variable": {
+		"prefix": "tokenvar",
+		"scope": "http",
+		"body": [
+			"@token = ${1:your-jwt-token}"
+		],
+		"description": "Define a reusable authentication token"
+	},
+	"Environment variable": {
+		"prefix": "envvar",
+		"scope": "http",
+		"body": [
+			"@${1:baseUrl} = {{$dotenv ${2:BASE_URL}}}"
+		],
+		"description": "Read a variable from an environment file"
+	},
+	"Request with bearer token": {
+		"prefix": "authget",
+		"scope": "http",
+		"body": [
+			"GET {{baseUrl}}${1:/api/profile} HTTP/1.1",
+			"Authorization: Bearer {{token}}",
+			"Accept: application/json"
+		],
+		"description": "Authenticated GET request"
+	},
+	"POST login": {
+		"prefix": "login",
+		"scope": "http",
+		"body": [
+			"POST {{baseUrl}}/auth/login HTTP/1.1",
+			"Content-Type: application/json",
+			"",
+			"{",
+			"  \"username\": \"${1:username}\",",
+			"  \"password\": \"${2:password}\"",
+			"}"
+		],
+		"description": "Login request"
+	},
+	"POST register": {
+		"prefix": "register",
+		"scope": "http",
+		"body": [
+			"POST {{baseUrl}}/auth/register HTTP/1.1",
+			"Content-Type: application/json",
+			"",
+			"{",
+			"  \"username\": \"${1:username}\",",
+			"  \"password\": \"${2:password}\"",
+			"}"
+		],
+		"description": "Registration request"
+	},
+	"POST empty JSON": {
+		"prefix": "postempty",
+		"scope": "http",
+		"body": [
+			"POST {{baseUrl}}${1:/api/resource} HTTP/1.1",
+			"Content-Type: application/json",
+			"",
+			"{}"
+		],
+		"description": "POST with an empty JSON object"
+	},
+	"PATCH field": {
+		"prefix": "patchfield",
+		"scope": "http",
+		"body": [
+			"PATCH {{baseUrl}}${1:/api/resource}/${2:id} HTTP/1.1",
+			"Content-Type: application/json",
+			"",
+			"{",
+			"  \"${3:field}\": \"${4:value}\"",
+			"}"
+		],
+		"description": "Update a single field"
+	},
+	"DELETE by ID": {
+		"prefix": "deleteid",
+		"scope": "http",
+		"body": [
+			"DELETE {{baseUrl}}${1:/api/resource}/${2:id} HTTP/1.1"
+		],
+		"description": "Delete resource by ID"
+	}
+}
