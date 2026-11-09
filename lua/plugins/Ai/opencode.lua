@@ -1,7 +1,7 @@
 return {
   {
     'NickvanDyke/opencode.nvim',
-    version = '*',
+    branch = 'main',
 
     dependencies = {
       {
@@ -9,7 +9,6 @@ return {
         opts = {
           input = {},
           picker = {},
-          terminal = {},
         },
       },
     },
@@ -17,44 +16,31 @@ return {
     config = function()
       vim.o.autoread = true
 
+      local terminal = require 'core.terminal'
+
       ---@type opencode.Opts
-      -- vim.g.opencode_opts = {
-      --   -- custom opts if needed
-      --   provider = {
-      --     enabled = 'wezterm',
-      --     wezterm = {},
-      --   },
-      -- }
       vim.g.opencode_opts = {
-        provider = {
-          enabled = 'snacks',
-          snacks = {
-            -- ...
-          },
-        },
-
-        events = {
-          reload = true,
-        },
-
         server = {
-          start = false,
-          stop = false,
-          toggle = false,
+          start = function()
+            terminal.open()
+          end,
         },
       }
 
       local opencode = require 'opencode'
 
       vim.keymap.set({ 'n', 'x' }, '<leader>oa', function()
-        opencode.ask('@this: ', { submit = true })
+        terminal.open()
+        opencode.ask '@this: '
       end, { desc = 'OpenCode Ask' })
 
       vim.keymap.set({ 'n', 'x' }, '<leader>op', function()
+        terminal.open()
         opencode.prompt '@this'
       end, { desc = 'OpenCode Prompt' })
 
       vim.keymap.set({ 'n', 'x' }, '<leader>os', function()
+        terminal.open()
         opencode.select()
       end, { desc = 'OpenCode Select' })
 
@@ -69,30 +55,41 @@ return {
       end, { desc = 'Send line to OpenCode', expr = true })
 
       vim.keymap.set('n', '<leader>oo', function()
-        opencode.command 'terminal.focus'
+        terminal.open()
       end, { desc = 'Focus OpenCode' })
 
+      -- OpenCode v2 has no TUI command API; send PageUp/PageDown to the TUI.
       vim.keymap.set('n', '<leader>ou', function()
-        opencode.command 'session.half.page.up'
-      end, { desc = 'Scroll up' })
+        terminal.send '\27[5~'
+      end, { desc = 'Scroll OpenCode up' })
 
       vim.keymap.set('n', '<leader>od', function()
-        opencode.command 'session.half.page.down'
-      end, { desc = 'Scroll down' })
+        terminal.send '\27[6~'
+      end, { desc = 'Scroll OpenCode down' })
 
       vim.keymap.set('x', '<leader>oD', function()
-        opencode.ask(
-          [[@this
+        terminal.open()
+        opencode.ask [[@this
 
 Find the official documentation links for this selected text.
 Include:
 - Official documentation
 - API references
 - Examples
-- Related resources]],
-          { submit = true }
-        )
+- Related resources]]
       end, { desc = 'Find Documentation' })
+
+      -- Show the OpenCode TUI when it starts executing a prompt.
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'OpencodeEvent:session.execution.started',
+        callback = function()
+          local term = terminal.floating()
+          if not term:is_open() then
+            term:open()
+          end
+        end,
+        desc = 'Show OpenCode floating terminal on execution',
+      })
     end,
   },
 }

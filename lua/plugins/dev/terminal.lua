@@ -167,23 +167,15 @@ return {
     })
 
     -- =====================================================
-    -- PERSISTENT FLOATING TERMINAL
+    -- PERSISTENT FLOATING TERMINAL (OPENCODE)
     -- =====================================================
 
-    local floating = Terminal:new {
-      count = 4,
-      direction = 'float',
-      hidden = true,
-
-      float_opts = {
-        border = 'curved',
-      },
-    }
+    local floating = require('core.terminal').floating()
 
     map({ 'n', 't' }, '<leader>tf', function()
       floating:toggle()
     end, {
-      desc = 'Toggle Floating Terminal',
+      desc = 'Toggle OpenCode Floating Terminal',
     })
 
     -- =====================================================

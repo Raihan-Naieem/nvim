@@ -31,7 +31,7 @@ return {
       require('mini.operators').setup()
 
       require('mini.comment').setup()
-      require('mini.statusline').setup { use_icons = vim.g.have_nerd_font }
+      -- require('mini.statusline').setup { use_icons = vim.g.have_nerd_font }
 
       -- cursor location to line:column
       require('mini.statusline').section_location = function()

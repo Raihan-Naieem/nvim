@@ -36,7 +36,7 @@ return {
       },
 
       quickfile = { enabled = true },
-      statuscolumn = { enabled = true },
+      -- statuscolumn = { enabled = true },
       image = { enabled = true },
       dim = { enabled = true },
 

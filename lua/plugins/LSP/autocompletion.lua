@@ -37,7 +37,7 @@ return {
       completion = {
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 500,
+          auto_show_delay_ms = 1000,
         },
       },
 
@@ -52,8 +52,8 @@ return {
           opencode_ask = { 'lsp' },
         },
 
-        -- providers = {
-        --   snippets = {
+        -- providers ={
+        --    snippets = {
         --     score_offset = 200,
         --   },
         --
@@ -76,7 +76,7 @@ return {
       },
 
       snippets = {
-        preset = 'luasnip',
+        -- preset = 'luasnip',
       },
 
       fuzzy = {
@@ -94,6 +94,15 @@ return {
     },
 
     config = function(_, opts)
+      local luasnip = require 'luasnip'
+
+      -- Extend JavaScript snippets to TypeScript filetypes
+      luasnip.filetype_extend('typescript', { 'javascript' })
+      luasnip.filetype_extend('typescriptreact', {
+        'javascriptreact',
+        'typescript',
+      })
+
       -- Load friendly-snippets (found via package.json manifests in runtimepath)
       require('luasnip.loaders.from_vscode').lazy_load()
 

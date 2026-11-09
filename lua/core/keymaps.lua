@@ -1,9 +1,6 @@
 -- save, quit
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>', { desc = 'save' })
-vim.keymap.set('n', '<leader>q', function()
-  vim.cmd 'Neotree close'
-  vim.cmd 'q'
-end, { desc = 'Quit Neovim' })
+vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit Neovim' })
 
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'open project view' })

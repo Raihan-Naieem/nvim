@@ -14,6 +14,9 @@ vim.o.relativenumber = true
 -- vim.o.mouse = 'a'
 vim.o.showmode = false
 
+-- Hide the statusline entirely (0 = never show it)
+vim.o.laststatus = 0
+
 vim.o.breakindent = true -- Enable break indent
 vim.o.undofile = true -- Save undo history
 vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term

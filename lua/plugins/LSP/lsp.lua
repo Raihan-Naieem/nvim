@@ -138,9 +138,33 @@ return {
         },
         ts_ls = {
           init_options = {
+            hostInfo = 'Neovim',
+
             tsserver = {
               path = vim.fn.expand '~/.local/share/nvim/mason/typescript5/node_modules/typescript/lib',
+              useSyntaxServer = 'auto',
             },
+
+            preferences = {
+              quotePreference = 'single',
+
+              importModuleSpecifierPreference = 'shortest',
+              importModuleSpecifierEnding = 'minimal',
+
+              includeCompletionsForModuleExports = true,
+              includeCompletionsForImportStatements = true,
+
+              includeInlayParameterNameHints = 'all',
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+
+              preferTypeOnlyAutoImports = true,
+            },
+
+            supportsHoverVerbosity = true,
+            maximulHoverLength = 2000,
           },
         },
         lua_ls = {
