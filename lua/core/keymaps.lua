@@ -5,6 +5,9 @@ vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit Neovim' })
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'open project view' })
 vim.keymap.set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'open diagnostic [q]uickfix list' })
+vim.keymap.set({ 'n', 'x' }, 'grS', function()
+  require('core.replace').open()
+end, { desc = 'Replace a literal string in the buffer' })
 -- vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'exit terminal mode' })
 vim.keymap.set('n', '<c-h>', '<c-w><c-h>', { desc = 'move focus to the left window' })
 vim.keymap.set('n', '<c-l>', '<c-w><c-l>', { desc = 'move focus to the right window' })
@@ -55,7 +58,7 @@ vim.keymap.set({ 'n', 'v' }, 'x', '"_x', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'c', '"_c', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'C', '"_C', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { noremap = true })
-vim.keymap.set({ 'n', 'v' }, 'D', '"_D', { noremap = true })
+-- vim.keymap.set({ 'n', 'v' }, 'D', '"_D', { noremap = true })
 
 -- makes cursor fixed in middle when using j and k to scroll
 local opts = { noremap = true, silent = true }
