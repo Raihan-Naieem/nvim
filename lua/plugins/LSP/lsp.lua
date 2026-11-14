@@ -32,6 +32,19 @@ return {
 
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+          -- Apply the first available quick fix for the diagnostic on the cursor line
+          map('grf', function()
+            local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
+            vim.lsp.buf.code_action {
+              apply = true,
+              context = {
+                only = { 'quickfix' },
+                -- `code_action` sends these as-is, so they must be LSP diagnostics
+                -- (with `range`/`code`), not `vim.Diagnostic` objects.
+                diagnostics = vim.lsp.diagnostic.from(diagnostics),
+              },
+            }
+          end, 'Apply Quick Fix')
           map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -133,8 +146,26 @@ return {
         rust_analyzer = {},
         html = {},
         cssls = {},
-        emmet_ls = {
-          filetypes = { 'html', 'css', 'javascript', 'javascriptreact', 'typescriptreact', 'typescript' },
+        -- Emmet via vscode-emmet-helper.
+        -- `emmet_ls` expanded *any* word into a tag (`aa` -> `<aa></aa>`); this
+        -- server filters that noise out, so only real abbreviations are offered.
+        -- `javascript`/`typescript` are intentionally excluded: Emmet has no
+        -- syntax for plain TS/JS and it caused tag spam in those buffers.
+        emmet_language_server = {
+          filetypes = {
+            'html',
+            'css',
+            'scss',
+            'less',
+            'sass',
+            'javascriptreact',
+            'typescriptreact',
+          },
+          init_options = {
+            showExpandedAbbreviation = 'always',
+            showAbbreviationSuggestions = false,
+            showSuggestionsAsSnippets = true,
+          },
         },
         ts_ls = {
           init_options = {
