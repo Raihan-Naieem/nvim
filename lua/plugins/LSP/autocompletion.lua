@@ -76,7 +76,7 @@ return {
       },
 
       snippets = {
-        -- preset = 'luasnip',
+        preset = 'luasnip',
       },
 
       fuzzy = {

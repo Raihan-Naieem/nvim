@@ -49,32 +49,6 @@ return {
       { '<leader>l', group = '[L]azy git' },
       { '<leader>l', group = '[L]azy git' },
       { '<leader>o', group = '[O]penCode' },
-
-      -- tmux stuff ctrl-b
-      {
-        '<C-b>',
-        group = '[T]mux',
-        mode = 'n',
-        {
-          name = 'Sessions',
-          '<C-b>s',
-          desc = 'List sessions',
-        },
-        { '<C-b>d', desc = 'Detach session' },
-
-        { '<C-b>c', desc = 'Create window' },
-        { '<C-b>w', desc = 'List windows' },
-        { '<C-b>n', desc = 'Next window' },
-        { '<C-b>p', desc = 'Previous window' },
-        { '<C-b>&', desc = 'Kill window' },
-
-        { '<C-b>%', desc = 'Split vertical' },
-        { '<C-b>"', desc = 'Split horizontal' },
-        { '<C-b>o', desc = 'Next pane' },
-        { '<C-b>x', desc = 'Kill pane' },
-        { '<C-b>z', desc = 'Zoom pane' },
-        { '<C-b>q', desc = 'Show pane numbers' },
-      },
     },
   },
 }

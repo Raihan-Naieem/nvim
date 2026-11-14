@@ -89,7 +89,8 @@ return {
 
       require('mini.notify').setup {
         lsp_progress = {
-          enable = true,
+          -- enable = true,
+          enable = false,
         },
         window = {
           config = {
@@ -100,7 +101,7 @@ return {
         hooks = {
           pre_open = function(buf_id, notif)
             if notif.level == vim.log.levels.ERROR then
-              notif.opts.duration = 2000 -- 2 sec for errors
+              notif.opts.duration = 500 -- 2 sec for errors
             end
           end,
         },
