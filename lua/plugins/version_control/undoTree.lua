@@ -32,7 +32,7 @@ return {
     require("telescope").setup(opts)
     require("telescope").load_extension("undo")
   end,
-},
+}
 
 
 
