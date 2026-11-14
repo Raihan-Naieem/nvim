@@ -19,5 +19,18 @@ return {
   },
   config = function()
     require('telescope').load_extension 'lazygit'
+
+    -- Neovim's global terminal-mode <Esc> mapping (plugins/dev/terminal.lua)
+    -- would swallow Esc before LazyGit sees it. Re-map it buffer-locally to
+    -- itself so the key is forwarded to the LazyGit process instead.
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'lazygit',
+      callback = function(event)
+        vim.keymap.set('t', '<Esc>', '<Esc>', {
+          buffer = event.buf,
+          desc = 'Send Esc to LazyGit',
+        })
+      end,
+    })
   end,
 }
