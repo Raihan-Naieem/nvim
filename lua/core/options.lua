@@ -1,11 +1,14 @@
+-- Fedora's /etc/profile.d/wezterm.sh wraps its OSC sequences in tmux DCS
+-- passthrough when $TMUX is set. Neovim's :terminal can't unwrap passthrough,
+-- so the payload (1337;SetUserVar=..., OSC 7 cwd) is printed as literal text.
+-- None of it is usable inside nvim anyway, so skip it for spawned processes.
+vim.env.WEZTERM_SHELL_SKIP_ALL = '1'
+
 --fold
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldenable = true
 vim.o.foldlevel = 99 -- Prevent everything from starting folded
-
--- Follow the current file's directory so tmux's path/git widgets track vim
-vim.o.autochdir = true
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -17,8 +20,8 @@ vim.o.relativenumber = true
 -- vim.o.mouse = 'a'
 vim.o.showmode = false
 
--- Hide the statusline entirely (0 = never show it)
-vim.o.laststatus = 0
+-- Show the statusline for every window (2 = global statusline)
+vim.o.laststatus = 2
 
 vim.o.breakindent = true -- Enable break indent
 vim.o.undofile = true -- Save undo history

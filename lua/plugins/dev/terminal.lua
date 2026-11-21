@@ -199,10 +199,9 @@ return {
     -- TERMINAL MODE MAPPINGS
     -- =====================================================
 
-    -- Exit terminal mode without closing the terminal.
-    map('t', '<Esc>', [[<C-\><C-n>]], {
-      desc = 'Exit Terminal Mode',
-    })
+    -- Deliberately no <Esc> mapping in terminal mode: Esc must reach the
+    -- program (opencode uses it to cancel/close/clear). Use <C-\><C-n> or the
+    -- <C-h/j/k/l> nav maps to leave terminal mode.
 
     -- Navigate between Neovim windows from terminal mode.
     map('t', '<C-h>', [[<C-\><C-n><C-w>h]], {

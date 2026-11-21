@@ -49,7 +49,58 @@ return {
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
           map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          -- Show source-definition hits in a Telescope picker.
+          ---@param items vim.quickfix.entry[]
+          local function show_locations(items)
+            local conf = require('telescope.config').values
+            local pickers = require 'telescope.pickers'
+            local picker = pickers.new({}, {
+              prompt_title = 'LSP Source Definitions',
+              finder = require('telescope.finders').new_table {
+                results = items,
+                entry_maker = require('telescope.make_entry').gen_from_quickfix {},
+              },
+              previewer = conf.qflist_previewer {},
+              sorter = conf.generic_sorter {},
+              push_cursor_on_edit = true,
+              push_tagstack_on_edit = true,
+            })
+            picker:find()
+          end
+
+          -- `textDocument/definition` resolves default imports in JS/TS to the
+          -- local import statement. TypeScript's "go to source definition"
+          -- command resolves the real implementation instead, including files
+          -- inside node_modules. Fall back to the normal definitions picker
+          -- when the symbol has no source (e.g. a declaration-only package).
+          local function goto_definition()
+            local client = vim.lsp.get_clients({ bufnr = event.buf, name = 'ts_ls' })[1]
+            if not client then
+              require('telescope.builtin').lsp_definitions()
+              return
+            end
+
+            local params = vim.lsp.util.make_position_params(vim.api.nvim_get_current_win(), client.offset_encoding)
+            client:exec_cmd({
+              command = '_typescript.goToSourceDefinition',
+              title = 'Go to source definition',
+              arguments = { params.textDocument.uri, params.position },
+            }, { bufnr = event.buf }, function(err, result)
+              local items = {}
+              if not err and type(result) == 'table' and not vim.tbl_isempty(result) then
+                items = vim.lsp.util.locations_to_items(result, client.offset_encoding)
+              end
+
+              if #items == 0 then
+                require('telescope.builtin').lsp_definitions()
+                return
+              end
+
+              show_locations(items)
+            end)
+          end
+
+          map('grd', goto_definition, '[G]oto [D]efinition')
           map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
           map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
           map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
@@ -172,7 +223,6 @@ return {
             hostInfo = 'Neovim',
 
             tsserver = {
-              path = vim.fn.expand '~/.local/share/nvim/mason/typescript5/node_modules/typescript/lib',
               useSyntaxServer = 'auto',
             },
 
@@ -195,7 +245,6 @@ return {
             },
 
             supportsHoverVerbosity = true,
-            maximulHoverLength = 2000,
           },
         },
         lua_ls = {

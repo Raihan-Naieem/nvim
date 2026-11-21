@@ -52,27 +52,27 @@ return {
           opencode_ask = { 'lsp' },
         },
 
-        -- providers ={
-        --    snippets = {
-        --     score_offset = 200,
-        --   },
-        --
-        --   buffer = {
-        --     score_offset = 160,
-        --   },
-        --
-        --   lsp = {
-        --     score_offset = 130,
-        --   },
-        --
-        --   path = {
-        --     score_offset = 80,
-        --   },
-        --
-        --   omni = {
-        --     score_offset = 30,
-        --   },
-        -- },
+        providers = {
+          snippets = {
+            score_offset = 200,
+          },
+
+          buffer = {
+            score_offset = 160,
+          },
+
+          lsp = {
+            score_offset = 230,
+          },
+
+          path = {
+            score_offset = 80,
+          },
+
+          omni = {
+            score_offset = 30,
+          },
+        },
       },
 
       snippets = {
