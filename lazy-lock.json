@@ -4,6 +4,7 @@
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
   "citruszest.nvim": { "branch": "main", "commit": "c8c0017d1b2efa4b891af28995bae8d58c87528a" },
   "conform.nvim": { "branch": "master", "commit": "016802de402556da54c36bd7359b441266b01cdd" },
+  "easy-dotnet.nvim": { "branch": "main", "commit": "b44a8672706c14298876330bc405271220af6aa0" },
   "fidget.nvim": { "branch": "main", "commit": "9e0201673e08e997e7cf52afca5565c70bd117f3" },
   "friendly-snippets": { "branch": "main", "commit": "7a1c9f7897a4eb078b157a04c7af81e5869215b1" },
   "gitsigns.nvim": { "branch": "main", "commit": "c0862d382a35b7b45757d8d151a6a634c09bf3ce" },

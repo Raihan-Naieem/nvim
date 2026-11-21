@@ -19,8 +19,8 @@ vim.o.autochdir = true
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
-vim.opt.tabstop = 4 -- Number of spaces a tab counts for
-vim.opt.shiftwidth = 4 -- Number of spaces to use for autoindent
+vim.opt.tabstop = 2 -- Number of spaces a tab counts for
+vim.opt.shiftwidth = 2 -- Number of spaces to use for autoindent
 
 vim.o.wrap = true
 vim.o.breakindent = true -- wrap follows indent
@@ -30,7 +30,7 @@ vim.o.number = true -- Make line numbers default
 vim.o.relativenumber = true
 
 vim.o.winborder = 'rounded'
-vim.o.winbl = 0
+vim.o.winbl = 100
 vim.o.pumborder = 'rounded'
 vim.o.pummaxwidth = 80
 

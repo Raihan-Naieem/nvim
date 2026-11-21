@@ -1,3 +1,7 @@
+vim.keymap.set('n', '<leader>D', '<cmd>Dotnet<CR>', {
+  desc = '.NET Commands',
+})
+
 -- save, quit
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>', { desc = 'save' })
 vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = 'Quit Neovim' })
